@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>भाषा मर्कअप टूल</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <a href="index.html" class="back-button" data-lang-en="Go Back" data-lang-hi="पिचे जाये">Go Back</a>
+        </div>
+        <div class="language-switch-markup">
+            <button id="lang-button" onclick="switchLanguage('en')">English</button>
+            <p>|</p>
+            <button id="lang-button" onclick="switchLanguage('hi')">हिंदी</button>
+        </div>
+    </div>
+    
+    <h1 data-lang-en="Language Markup Interface" data-lang-hi="भाषा मर्कअप टूल">Language Markup Interface</h1>
+    <div class="user-info">
+        <h3 data-lang="en">Welcome, <span id="displayName"></span></h3>
+        <h3 data-lang="en">Proficiency Level: <span id="displayProficiency"></span></h3>
+    </div>
+    <div class="container">
+        <div class="file-inputs">
+            <div class="file-input-label">
+                <label id="label-name" for="audioFile" data-lang-en="Upload Audio File" data-lang-hi="ऑडियो फ़ाइल अपलोड करें">Upload Audio File</label>
+                <input type="file" id="audioFile" accept="audio/*" disabled>
+            </div>
+            <div class="file-input-label">
+                <label id="label-name" for="transcriptFile" data-lang-en="Upload Transcript File" data-lang-hi="ट्रांसक्रिप्ट अपलोड करें">Upload Transcript File</label>
+                <input type="file" id="transcriptFile" accept=".txt" onchange="storeFileName(event)" disabled>
+            </div>
+            <div class="file-input-label" style="display: none;">
+                <label id="label-name" for="transcriptFile">Select File</label>
+                <select class="file-select-label" id="fileSelect" onchange="useSelectedFile()">
+                    <option value="" disabled selected>Select Files</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="file-progress">
+            <label><span id="storyProgress">Story 0 of 18</span></label>
+            <progress id="progressBar" value="0" max="18"></progress>
+        </div>
+        
+        <audio id="audioPlayer" controls class="audio-player">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <div class="transcript-container" id="transcriptDisplay">
+            <p data-lang-en="Story is loading..." data-lang-hi="कहानी लोड हो रही है">Story is loading...</p>
+        </div>
+        
+        <div class="buttons">
+            <button id="exportButton" style="display: none;">Export as TXT</button>
+            <button id="exportCsvButton" style="display: none;">Export as CSV</button>
+            <button id="resetButton" data-lang-en="Reset Markers" data-lang-hi="मार्कर रीसेट करें">Reset Markers</button>
+            <button id="skipButton" data-lang-en="Skip Story" data-lang-hi="अगली कहानी">Skip Story</button>
+            <button id="sendDataButton">Send Data</button>
+        </div>
+        <p id="notice" data-lang-en="Don't forget to <strong>Send Data</strong> before starting with a new story !" data-lang-hi="नई कहानी शुरू करने से पहले <strong>डेटा भेजना</strong> न भूलें!">Don't forget to <strong>Send Data</strong> before starting with a new story !</p>
+        <textarea id="output" readonly placeholder="The processed transcript will appear here..."></textarea>
+        <div class="phrases-container" id="outputArea"></div>
+    </div>
+    <p class="contact-info" data-lang-en="In case of any queries or errors, please contact: <a href='mailto:mansi.dhamne22@spit.ac.in'>mansi.dhamne22@spit.ac.in</a>" data-lang-hi="यदि आपके पास कोई प्रश्न या प्रतिक्रिया हो तो कृपया संपर्क करें: <a href='mailto:mansi.dhamne22@spit.ac.in'>mansi.dhamne22@spit.ac.in</a>">
+        In case of any queries or errors, please contact: <a href="mailto:mansi.dhamne22@spit.ac.in">mansi.dhamne22@spit.ac.in</a>
+    </p>   
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get("name");
+        const proficiency = params.get("proficiency");
+
+        document.getElementById("displayName").textContent = name || "Unknown User";
+        document.getElementById("displayProficiency").textContent = proficiency !== null ? proficiency : "Not Provided";
+    </script>
+    <script src="script.js"></script>  
+</body>
+<script>
+    function switchLanguage(lang) {
+        // Toggle elements with data-lang attributes
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
+        });
+
+        // Update elements that store alternative translations in attributes
+        document.querySelectorAll('[data-lang-en]').forEach(el => {
+            const translation = el.getAttribute(`data-lang-${lang}`);
+            if (translation) el.innerHTML = translation;
+        });
+    }
+</script>
+</html>

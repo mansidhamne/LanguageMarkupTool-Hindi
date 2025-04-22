@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>भाषा मर्कअप टूल</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 class="main-header" data-lang-en="Welcome to the Language Markup Tool" data-lang-hi="भाषा मर्कअप टूल में आपका स्वागत है">Welcome to the Language Markup Tool</h1>
+    <div class="language-switch">
+        <button id="lang-button" onclick="switchLanguage('en')">English</button>
+        <p>|</p>
+        <button id="lang-button" onclick="switchLanguage('hi')">हिंदी</button>
+    </div>
+    <div class="info">
+        <p id="instructions" data-lang-en="Please fill in the form below to get started:" data-lang-hi="कृपया नीचे दिए गए फॉर्म को भरें और शुरुआत करें:">Please fill in the form below to get started:</p>
+
+        <form action="markup.html" method="GET" class="container">
+            <label for="name" id="label-style" data-lang-en="Full Name:" data-lang-hi="पूरा नाम:">Full Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name">
+
+            <label for="email" data-lang-en="Email:" data-lang-hi="ईमेल:">Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+
+            <label for="proficiency" data-lang-en="Proficiency Level:" data-lang-hi="प्रवीणता का स्तर:">Proficiency Level:</label>
+            <select id="proficiency" name="proficiency" required>
+                <option value="" data-lang-en="Select proficiency level" data-lang-hi="प्रवीणता स्तर चुनें" selected>Select proficiency level</option>
+                <option value="1" data-lang-en="Limited Working Proficiency" data-lang-hi="सीमित प्रवीणता">Limited Working Proficiency</option>
+                <option value="2" data-lang-en="Full Professional Proficiency" data-lang-hi="व्यावसायिक प्रवीणता">Full Professional Proficiency</option>
+            </select>
+
+            <p id="instructions" data-lang-en="Introduction:" data-lang-hi="परिचय:">Introduction:</p>
+            <h4 data-lang-en="This tool is designed to assist in marking natural syntactic and prosodic breaks in English texts. 
+            We’re looking for your expertise in identifying appropriate pause points — similar to those used when reading aloud stories to children aged 6–12
+            to segment text into meaningful, fluent units. The annotated data will be used
+            for studying speech rhythm, prosody, and comprehension. These annotations will be used in 
+            linguistic analysis, fluency modeling, and educational tools." data-lang-hi="यह उपकरण हिंदी पाठों में प्राकृतिक वाक्यविन्यास और प्रोसोडिक संबंधी विरामों को चिह्नित करने में सहायता के लिए डिज़ाइन किया गया है। 
+            हम पाठ का उपयोग करके सभी विराम बिंदुओं की पहचान करना चाहते हैं - 6-12 वर्ष की आयु के बच्चों को कहानियाँ 
+            पढ़ते समय उपयोग किए जाने वाले विराम बिंदुओं के समान। इसका उद्देश्य पाठ को सार्थक, धाराप्रवाह भागों में विभाजित करना है। 
+            डेटा का उपयोग भाषाई विश्लेषण और शैक्षिक उपकरणों के लिए किया जाएगा।">This tool is designed to assist in marking natural syntactic and prosodic breaks in English texts. 
+                We’re looking for your expertise in identifying appropriate pause points — similar to those used when reading aloud stories to children aged 6–12
+                to segment text into meaningful, fluent units. The annotated data will be used
+                for studying speech rhythm, prosody, and comprehension. These annotations will be used in 
+                linguistic analysis, fluency modeling, and educational tools.
+            </h4>
+
+            <p id="instructions" data-lang-en="How It Works:" data-lang-hi="यह कैसे कार्य करता है:">How It Works:</p>
+            <ul class="instructions-list">
+                <li data-lang="en">
+                    <strong>Before you begin:</strong> Ensure you fill in your name, email, and proficiency level.
+                </li>
+                <li data-lang="hi" style="display: none;">
+                    <strong>शुरू करने से पहले:</strong> कृपया अपना नाम, ईमेल और प्रवीणता स्तर भरें।
+                </li>
+                <li data-lang="en">
+                    <strong>Loading the text:</strong> Stories will be loaded sequentially once you start with the experiment.
+                </li>
+                <li data-lang="hi" style="display: none;">
+                    <strong>पाठ लोड करना:</strong> एक बार प्रयोग शुरू करने पर कहानियाँ क्रमबद्ध रूप से लोड की जाएँगी।
+                </li>
+                <li data-lang="en">
+                    <strong>Mark Allowed Pauses:</strong> Click on a word to add a marker 
+                    <strong class="red-pipe-info">(a single pipe |)</strong> indicating an allowed pause between the current word and the next. 
+                    Click the word again to remove the marker.
+                </li>
+                
+                <li data-lang="hi" style="display: none;">
+                    <strong>स्वीकृत विराम चिन्ह लगाना:</strong> एक शब्द पर क्लिक करें और उसे एक पाइप 
+                    <strong class="red-pipe-info">( | )</strong> चिन्ह से चिह्नित करें, जो वर्तमान शब्द और अगले शब्द के बीच विराम का संकेत देगा। 
+                    फिर से क्लिक करने पर यह चिन्ह हट जाएगा।
+                </li>
+                <li data-lang="en">
+                    <strong>Display of Prosodic Phrases:</strong> You will see a display with the words of the text grouped together as derived from your markings. If you feel that the grouping can be improved, please go back to the previous step.
+                </li>
+                <li data-lang="hi" style="display: none;">
+                    <strong>प्रत्योक्षकरण:</strong> आप देखेंगे कि आपके टुकड़े नीचे एक रंग में समूहीकृत हो गए हैं। 
+                    यदि आपको लगता है कि समूहों में सुधार किया जा सकता है, तो कृपया पिछला कदम देखें।
+                </li>
+                <li data-lang="en">
+                    <strong>Send Data:</strong> Before starting a new story, send the processed data by clicking on the <strong id="sd-bold">Send Data </strong>button."
+                </li>
+                <li data-lang="hi" style="display: none;">
+                    <strong>डेटा भेजना:</strong> नया पाठ शुरू करने से पहले, कृपया डेटा को <strong id="sd-bold">Send Data</strong> बटन पर क्लिक करके भेजें।
+                </li>
+                <li data-lang="en">
+                    <strong>Continue where you left off:</strong> To resume your progress, simply enter the <strong>same email address</strong> in the form at the beginning. Your previous session and story progress will be restored automatically.
+                </li>
+                <li data-lang="hi" style="display: none;">
+                    <strong>जहाँ से छोड़ा था वहीं से शुरू करें:</strong> अपना <strong>वही ईमेल पता</strong> भरें और आपकी पिछली कहानी स्वचालित रूप से पुनर्स्थापित हो जाएगी।
+                </li>
+            </ul>
+
+            <p id="instructions">Example Markup</p>
+            <!--Add a video here-->
+            <video width="75%" height="auto" controls>
+                <source src="Example Instructions.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <h2 id="example" data-lang-en="Given Text" data-lang-hi="दिया गया पाठ:">Given Text:</h2>
+            <p class="given-text">टॉम को एक छोटी सी बिल्ली का बच्चा मिला। वह उसके पीछे-पीछे घर आ गया। उसने उसे दूध पिलाया और उसकी देखभाल की। ​​वे हमेशा के लिए सबसे अच्छे दोस्त बन गए।</p>
+
+            <h2 id="example" data-lang-en="Mark your text in a similar manner" data-lang-hi="अपने पाठ को इसी तरह से चिह्नित करें:">Mark your text in a similar manner:</h2>
+            <div class="marked-text-container">
+                <p>टॉम को एक छोटी सी बिल्ली का<span class="red-pipe">|</span> बच्चा मिला। <span class="red-pipe">|</span> वह उसके पीछे-पीछे <span class="red-pipe">|</span> घर आ गया। <span class="red-pipe">|</span> उसने उसे दूध पिलाया <span class="red-pipe">|</span> और उसकी देखभाल की। <span class="red-pipe">|</span> ​​वे हमेशा के लिए <span class="red-pipe">|</span> सबसे अच्छे दोस्त <span class="red-pipe">|</span> बन गए। <span class="red-pipe">|</span></p>
+            </div>
+            <p class="label-info" data-lang-en="The red pipe between the words marks the allowed pause." data-lang-hi="शब्दों के बीच लाल पाइप अनुमत विराम को चिह्नित करता है।" >The red pipe between the words marks the allowed pause.</p>
+            
+            <div class="image-container">
+                <h2 id="example" data-lang-en="Display of Prosodic Phrases:" data-lang-hi="प्रत्योक्षकरण:">Display of Prosodic Phrases:</h2>
+                <img src="marked_example_hindi.png" alt="Marked Text Example" width="100%">
+            </div>         
+
+            <button type="submit" id="start-button">Start Markup</button>
+        </form>
+        <p class="contact-info">
+            In case of any queries, please contact: <a href="mailto:mansi.dhamne22@spit.ac.in">mansi.dhamne22@spit.ac.in</a>
+        </p>   
+    </div>
+</body>
+<script>
+    function switchLanguage(lang) {
+        const elements = document.querySelectorAll('[data-lang-en]');
+    
+        elements.forEach(el => {
+            el.innerHTML = el.getAttribute(`data-lang-${lang}`);
+        });
+
+        document.querySelectorAll('[data-lang]').forEach(el => {
+            el.style.display = el.getAttribute('data-lang') === lang ? 'list-item' : 'none';
+        });
+
+        // For other inline elements
+        document.querySelectorAll('[data-lang-en]').forEach(el => {
+            el.innerHTML = el.getAttribute(`data-lang-${lang}`);
+        });
+}
+</script>
+</html>
